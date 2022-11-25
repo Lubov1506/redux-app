@@ -1,34 +1,39 @@
 import './App.css';
 import { Component, useReducer } from 'react';
 import { connect } from 'react-redux';
+import { increment, decrement, changeStep } from './actions/actionCreators';
 
-const App = (props) => {
-  const {count, dispatch} = props
-  const increment = () => {
-    const action = {
-      type: 'INCREMENT_COUNT'
-    }
-    dispatch(action)
-  };
-  const decrement = () => {
-    const action = {
-      type: 'DECREMENT_COUNT'
-    }
-    dispatch(action)
-  };
+const App = props => {
+  const { count, step } = props;
+
+  const inc = () => {props.increment()};
+  const dec = () => {props.decrement()};
+  const handlerInput = ({target: {value}}) =>{
+    props.changeStep(Number(value))
+  }
 
   return (
     <div className='App'>
       <h1>{count}</h1>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
+      <input type='number' value={step} onChange={handlerInput}/>
+      <div>
+      <button onClick={inc}>+</button>
+      <button onClick={dec}>-</button>        
+      </div>
+
     </div>
   );
-}
-const mapStateToProps = (state) =>{
+};
+const mapStateToProps = state => {
   return {
-    count: state.count
-  }
-}
-const WrappedApp = connect(mapStateToProps)(App);
+    count: state.count,
+    step: state.step
+  };
+};
+const mapDispatchToProps = {
+  increment,
+  decrement,
+  changeStep
+};
+const WrappedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 export default WrappedApp;
