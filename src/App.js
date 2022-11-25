@@ -1,18 +1,38 @@
 import './App.css';
-import { useState } from 'react';
+import { useReducer } from 'react';
+
+function reducer (state, action){
+  switch(action.type){
+    case 'PLUS_ONE':{
+      return {}
+    }
+    case 'SUB_ONE':{
+      return {}
+    }
+  }
+  return state
+}
 
 function App () {
-  const [count, setCount] = useState(0);
+  const [state, dispatch] = useReducer(reducer, {
+    counr: 0
+  });
 
   const increment = () => {
-    setCount(count + 1);
+    dispatch({
+      type: 'PLUS_ONE',
+      count: state.count+1
+    })
   };
   const decrement = () => {
-    setCount(count - 1);
+    dispatch({
+      type: 'SUB_ONE',
+      count: state.count-1
+    })
   };
   return (
     <div className='App'>
-      <h1>{count}</h1>
+      <h1>{state.count}</h1>
       <button onClick={increment}>+</button>
       <button onClick={decrement}>-</button>
     </div>
