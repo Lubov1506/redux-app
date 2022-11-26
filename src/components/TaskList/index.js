@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateTaskAction, deleteTaskAction } from '../../actions/actionCreators';
+import {
+  updateTaskAction,
+  deleteTaskAction
+} from '../../actions/actionCreators';
 
 const TaskList = props => {
   const { tasks } = props;
@@ -10,7 +13,7 @@ const TaskList = props => {
       <h1>Tasks</h1>
       <ul>
         {tasks.map(task => {
-            const {id} = task
+          const { id } = task;
           return (
             <li key={id}>
               <h2>{id}</h2>
@@ -25,7 +28,7 @@ const TaskList = props => {
                   });
                 }}
               />
-              <button onClick={()=>props.deleteTaskAction(id)}>Delete</button>
+              <button onClick={() => props.deleteTaskAction(id)}>Delete</button>
             </li>
           );
         })}
@@ -33,11 +36,7 @@ const TaskList = props => {
     </section>
   );
 };
-const mapStateToProps = state => {
-  return {
-    tasks: state.tasks
-  };
-};
+const mapStateToProps = ({ task: { tasks } }) => ({tasks});
 const mapDispatchToProps = {
   updateTaskAction,
   deleteTaskAction
