@@ -2,7 +2,9 @@ import * as API from '../api';
 import { put } from 'redux-saga/effects';
 import {
   createUserSuccessAction,
-  createUserErrorAction
+  createUserErrorAction,
+  getUsersSuccessAction,
+  getUsersErrorAction
 } from '../actions/actionCreators';
 
 export function * createUserSaga (action) {
@@ -15,5 +17,18 @@ export function * createUserSaga (action) {
     yield put(createUserSuccessAction({ user }));
   } catch (error) {
     yield put(createUserErrorAction(error));
+  }
+}
+
+export function * getUsersSaga () {
+  try {
+    const {
+      data: {
+        data:  users 
+      }
+    } = yield API.getUsers(action.payload);
+    yield put(getUsersSuccessAction( users ));
+  } catch (err) {
+    yield put(getUsersErrorAction(err));
   }
 }
