@@ -30,6 +30,29 @@ const userReducer = (state = initState, action) => {
         isFetching: false,
         eroor: error
       };
+    }c
+    case ACTION_TYPES.GET_USERS_REQUEST:{
+      return {
+        ...state,
+        isFetching: true
+      }
+    }
+    case ACTION_TYPES.GET_USERS_SUCCESS:{
+      const {users} = state
+      const {payload:{users:newUsers}} = action
+      return {
+        ...state,
+        isFetching:false,
+        users: [...users, ...newUsers]
+      }
+    }
+    case ACTION_TYPES.GET_USERS_ERROR:{
+      const {payload:{error}} = action
+      return {
+        ...state,
+        isFetching: false,
+        error: error  
+      }
     }
     default: {
       return state;

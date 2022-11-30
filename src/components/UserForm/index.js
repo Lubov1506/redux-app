@@ -13,11 +13,11 @@ const UserForm = props => {
       <h1>User Registration Form</h1>
       <Formik
         initialValues={{
-          firstName: 'Alex',
-          lastName: 'Doe',
-          email: 'asdf@sdf.zjfl',
-          birthday: '2000-01-05',
-          password: 'luygf*%$jnbhnd82'
+          firstName: '',
+          lastName: '',
+          email: '',
+          birthday: '',
+          password: ''
         }}
         onSubmit={onSubmitForm}
       >
