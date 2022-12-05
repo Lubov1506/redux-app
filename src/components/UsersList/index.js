@@ -6,17 +6,21 @@ const UsersList = props => {
   const { users, isFetching, error, getUsersRequestAction } = props;
 
   useEffect(() => {
-    getUsersRequestAction({
-      limit: 5,
-      offset: 0
-    });
+    getUsersRequestAction({});
   }, []);
 
+  const loadMore = () => {
+    getUsersRequestAction({
+        offset: users.length
+      });
+  };
+  console.log(users);
   return (
     <div>
       <h1>Users list</h1>
       {isFetching && <p>Loading . . .</p>}
-      {error && <p>Some error</p>}
+      {error && <p>error</p> }
+      <button onClick={loadMore}>Load more</button>
       {users
         ? users.map(u => {
             return <li key={u.id}>{u.firstName}</li>;

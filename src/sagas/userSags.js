@@ -20,7 +20,7 @@ export function * createUserSaga (action) {
   }
 }
 
-export function * getUsersSaga () {
+export function * getUsersSaga (action) {
   try {
     const {
       data: {
